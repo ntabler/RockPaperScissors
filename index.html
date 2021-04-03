@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+  <script>
+    var selectMove = ['rock', 'paper' , 'scizzors'];
+    var invalidInput = "Invalid Input, try again!";
+    var winResult = "Wow! You won that round!";
+    var loseResult = "Sorry, You lost that round!";
+    var drawResult = "Its a draw!!";
+    var cancelGame = "See you next time!"
+
+    function computerPlay()
+      {return selectMove[Math.floor(Math.random() * selectMove.length)];}
+
+    function playerPlay()
+      {
+        var play = prompt("What is your move?");
+        if (play != null) 
+          {
+          var play = play.toLowerCase()
+            if (play == "rock" || play == "paper" || play == "scizzors")
+              {return play;}
+            else
+              {alert(invalidInput);}
+              return invalidInput
+          }
+        else 
+          {return cancelGame}
+      }
+
+    function playGame(playerSelection, computerSelection)
+    {
+      computerSelection = computerPlay();
+      playerSelection = playerPlay();
+      //console.log(computerSelection)
+      //console.log(playerSelection)
+
+      if (playerSelection == "rock" && computerSelection == "scizzors" 
+        || playerSelection == "paper" && computerSelection == "rock" 
+        || playerSelection == "scizzors" && computerSelection == "paper") 
+          {return winResult}
+      else if (playerSelection == "rock" && computerSelection == "paper" 
+        || playerSelection == "paper" && computerSelection == "scizzors" 
+        || playerSelection == "scizzors" && computerSelection == "rock") 
+          {return loseResult}
+      else if (playerSelection == computerSelection) 
+          {return drawResult}
+      else if (playerSelection == cancelGame) 
+          {return cancelGame}
+      else
+          {return invalidInput}
+    }
+
+    function game()
+    {
+      var computerScore = 0;
+      var playerScore = 0;
+      while (computerScore < 5 && playerScore < 5) 
+      {
+        var outcome = playGame()
+        if (outcome == winResult)
+          {
+            console.log(winResult)
+            playerScore ++
+            if (playerScore == 5) 
+              {
+                return "Congratualtions, you won!"
+              }
+          }
+        else if (outcome == loseResult)
+          {
+            console.log(loseResult)
+            computerScore ++
+            if (computerScore == 5) 
+              {
+                return "Sorry, You lost!"
+              }
+          }
+        
+          else if (outcome == cancelGame)
+          {
+            return cancelGame
+          }
+          
+        else if (outcome == drawResult)
+          {
+            console.log(drawResult)
+            computerScore ++
+          }
+
+        else if (outcome == invalidInput)
+          {
+            console.log(invalidInput)
+          }
+
+      console.log("Your Score is " + playerScore)
+      console.log("The Opponent's score is " + computerScore)
+      }
+    }
+
+  </script>
+</body>
+</html>
